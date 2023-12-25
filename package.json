@@ -1,0 +1,19 @@
+{
+  "name": "qoala-ocr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Backend/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulvijay5/Qoala-OCR.git"
+  },
+  "author": "Rahul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rahulvijay5/Qoala-OCR/issues"
+  },
+  "homepage": "https://github.com/rahulvijay5/Qoala-OCR#readme"
+}
