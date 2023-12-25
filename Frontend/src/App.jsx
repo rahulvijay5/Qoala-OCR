@@ -7,6 +7,10 @@ import DisplayAllData from "./components/DisplayAllData";
 import UpdateForm from "./components/UpdateForm";
 import DeleteForm from "./components/DeleteEntry";
 
+const BACKEND_URL = "https://qoala-ocr-backend-production.up.railway.app";
+
+console.log("BACKEND_URL: ", BACKEND_URL);
+
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [extractedInfo, setExtractedInfo] = useState(null);
@@ -75,10 +79,11 @@ function App() {
         );
       }
 
-      const response = await axios.post(
-        "http://localhost:3001/api/add-to-database",
-        { result: extractedInfo, status: "success", errorMessage: null }
-      );
+      const response = await axios.post(`${BACKEND_URL}/api/add-to-database`, {
+        result: extractedInfo,
+        status: "success",
+        errorMessage: null,
+      });
 
       console.log(response.data.message);
       setShowSuccessMessage(true);
@@ -125,7 +130,7 @@ function App() {
 
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:3001/api/extract-info",
+        `${BACKEND_URL}/api/extract-info`,
         formData,
         {
           headers: {
@@ -160,7 +165,7 @@ function App() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-8 ">
       <div>
         <SideButtons
           onDisplayAllData={handleDisplayAllData}
@@ -179,12 +184,6 @@ function App() {
             onChange={handleFileChange}
           />
 
-          {error && (
-            <div>
-              <p className="text-red-500 font-bold">{error}</p>
-            </div>
-          )}
-
           <button
             className="outline bg-sky-600 text-white p-4 rounded-md ml-2 w-fit hover:bg-black max-w-fit font-semibold"
             onClick={handleUpload}
@@ -192,7 +191,14 @@ function App() {
             Upload
           </button>
         </div>
-        {loading && <p className="w-full text-center">Loading...</p>}
+        {error && (
+          <div>
+            <p className="text-red-500 text-center font-bold">{error}</p>
+          </div>
+        )}
+        {loading && (
+          <p className="w-full mt-2 text-center">Getting results...</p>
+        )}
 
         {extractedInfo && !loading && (
           <div className="w-full flex flex-col justify-center items-center">
@@ -228,6 +234,16 @@ function App() {
           {displayData && <DisplayFilteredData key={Date.now()} />}
           {displayAllData && <DisplayAllData key={Date.now()} />}
         </div>
+      </div>
+      <div className="italic bottom-0 flex justify-center">
+        <p>Find Github repository of this whole project</p>
+        <a
+          className="text-sky-600"
+          target="_blank"
+          href="https://github.com/rahulvijay5/Qoala-OCR"
+        >
+          @rahulvijay5🚀
+        </a>
       </div>
     </div>
   );

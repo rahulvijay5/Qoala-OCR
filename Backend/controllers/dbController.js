@@ -47,18 +47,17 @@ const updateOCRRecord = async (req, res) => {
 
 const createOCRRecord = async (req, res) => {
     try {
+        console.log("Once I got here")
+        console.log(req.body)
         const { result, status, errorMessage } = req.body;
         // Parse the JSON string to a JavaScript object
         const resultObject = JSON.parse(result);
-
         const newOCRRecord = new OCRRecord({
             result: resultObject,
             status,
             errorMessage,
         });
-
         await newOCRRecord.save();
-
         res.status(201).json({ message: 'OCR record created successfully.' });
     } catch (error) {
         console.error(error);

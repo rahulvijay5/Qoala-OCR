@@ -1,16 +1,3 @@
-// const mongoose = require('mongoose');
-
-// const ocrRecordSchema = new mongoose.Schema({
-//   result: { type: String, required: true, unique: true },
-//   status: { type: String, required: true },
-//   errorMessage: { type: String },
-//   timestamp: { type: Date, default: Date.now },
-// });
-
-// const OcrRecord = mongoose.model('OcrRecord', ocrRecordSchema);
-
-// module.exports = OcrRecord;
-
 const mongoose = require('mongoose');
 
 const ocrRecordSchema = new mongoose.Schema({
@@ -27,6 +14,6 @@ const ocrRecordSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-const OCRRecord = mongoose.model('OCRRecord', ocrRecordSchema);
+const OCRRecord = mongoose.model('OCRRecord', ocrRecordSchema, 'ocrCollection');
 
 module.exports = OCRRecord;

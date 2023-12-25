@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+const BACKEND_URL = "https://qoala-ocr-backend-production.up.railway.app";
+
+// import dotenv from "dotenv";
+// dotenv.config();
 // Display Filtered Data
 
 const DisplayFilteredData = () => {
@@ -10,12 +14,9 @@ const DisplayFilteredData = () => {
 
   const handleRetrieveData = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3001/api/ocr-records",
-        {
-          params: filterOptions,
-        }
-      );
+      const response = await axios.get(`${BACKEND_URL}/api/ocr-records`, {
+        params: filterOptions,
+      });
       setOCRData(response.data.ocrRecords);
     } catch (error) {
       console.error("Error fetching OCR data:", error.message);
@@ -39,14 +40,17 @@ const DisplayFilteredData = () => {
 
   return (
     <div className="border p-2 rounded-md">
-      <div className="flex justify-between">
-        <h2 className="text-2xl font-bold">OCR Data:</h2>
+      <div className="flex mb-2 justify-between">
+        <div>
+          <h2 className="text-2xl font-bold">OCR Data:</h2>
+          <p className="text-xs opacity-60">(ⓘ Try to filter entries by DOB)</p>
+        </div>
         <div className="flex justify-end items-center gap-2">
           <div>
             <label className="" htmlFor="dateOfBirthFilter">
               Filter by Date of Birth:
             </label>
-            <p className="text-xs opacity-60">(ⓘ format: 01-09-1997)</p>
+            <p className="text-xs opacity-60">(ⓘ format: 03/02/2003)</p>
           </div>
           <input
             className="border m-2 border-black p-1 text-black rounded-md"
